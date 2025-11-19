@@ -33,4 +33,6 @@ The easiest way to deploy is using Docker, as it handles the system dependencies
 1.  Create a new Web Service on Render.
 2.  Connect your GitHub repo.
 3.  Select "Docker" as the runtime.
-4.  Set the Root Directory to `backend` (or point to the backend Dockerfile).
+4.  **Crucial Step**:
+    - **Root Directory**: `backend`
+    - **Dockerfile Path**: `Dockerfile` (or leave blank if Root Directory is set to `backend`)
