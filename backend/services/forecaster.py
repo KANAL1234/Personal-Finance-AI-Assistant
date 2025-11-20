@@ -1,5 +1,3 @@
-import pandas as pd
-from statsmodels.tsa.arima.model import ARIMA
 import warnings
 
 class SpendingForecaster:
@@ -11,6 +9,10 @@ class SpendingForecaster:
         Forecast spending for the next `days`.
         history: list of dicts with "date" and "amount".
         """
+        # Lazy import to avoid loading heavy ML libraries at startup
+        import pandas as pd
+        from statsmodels.tsa.arima.model import ARIMA
+        
         if not history:
             return {"forecast": 0.0, "message": "No history provided"}
 
