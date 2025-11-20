@@ -9,17 +9,18 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-# Copy requirements (if you have one, otherwise we install manually for now)
-# It's better to freeze requirements first.
+# Copy requirements
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy app code
-COPY . .
+# Copy app code into 'backend' directory to preserve package structure
+COPY . ./backend
+
+# Set PYTHONPATH so python can find the 'backend' module
+ENV PYTHONPATH=/app
 
 # Expose port
 EXPOSE 8000
 
-# Run app
 # Run app using PORT environment variable (default 8000)
-CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}
+CMD uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8000}
